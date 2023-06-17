@@ -1,0 +1,71 @@
+<h1 style="text-align: center; margin-top: 50px;">Tài xỉu</h1>
+<div class="container">
+    <div class="tai">
+        <h1>
+            <span *ngIf="this.tongGiaTri >10 && this.isStatus===true"><span
+                    style="color: yellow;">({{this.tongGiaTri}})</span></span>Tài
+        </h1>
+        <button (click)="onTai()" *ngIf="count >5 && this.statusTai!==true">Nhập</button>
+        <p style="color: black; margin-bottom: -10px;" *ngIf="this.statusTai===false">{{ formatCurrency(moneyTai) }}</p>
+        <input type=" number" (change)="onhandelsTai($event)" class="text" placeholder="Nhập tiền..."
+            *ngIf="this.statusTai===true">
+        <div class="all">
+            <button (click)="alltai()" *ngIf="this.statusTai===true" class="all-in">All-in</button>
+            <button *ngIf="this.statusTai===true">Cược</button>
+        </div>
+
+    </div>
+
+
+    <div *ngFor="let row of rows">
+        <div class="item">
+            <p class="time" *ngIf="count !== 0">{{ count }}</p>
+            <div class="time1">
+                <button (click)=" open()" class="btn btn-success" *ngIf="this.count===0">Mở bát</button>
+            </div>
+            <p class="money">Tiền : {{ formatCurrency(money) }}</p>
+            <img class="dia"
+                src="https://res.cloudinary.com/doa7mkkpq/image/upload/v1687005753/ECMA/c9ws76ijcliaawrfs9zm.png"
+                alt="">
+            <div class="test">
+                <img *ngFor="let dice of row" class="xucxac_item" [src]="dice.imageUrl" alt="Xúc xắc" />
+            </div>
+            <img class="bat" [ngClass]="!this.status ? 'bat' : 'bat1'"
+                src="https://res.cloudinary.com/doa7mkkpq/image/upload/v1687006023/ECMA/fgsdxl7iqqg96ianjjbh.png"
+                alt="">
+        </div>
+        <div class="total">
+            <div *ngFor="let dice of row">
+                <span style="font-size: 20px; margin-left: 10px;" *ngIf="dice && this.status===true">({{dice.value
+                    }})</span>
+            </div>
+        </div>
+        <div class="xiu">
+            <h1>
+                <span *ngIf="this.tongGiaTri <= 10 && this.isStatus===true"><span
+                        style="color: yellow;">({{this.tongGiaTri}})</span></span>Xỉu
+            </h1>
+            <button (click)="onXiu()" *ngIf="count >5 && this.statusXiu!==true">Nhập</button>
+            <p style="color: black; margin-bottom: -10px;" *ngIf="this.statusXiu ===false">{{ formatCurrency(moneyXiu)
+                }}
+            </p>
+            <input type="number" class="text" placeholder="Nhập tiền..." (change)="onhandelsXiu($event)"
+                *ngIf="this.statusXiu===true">
+            <div class="all">
+                <button (click)="allXiu()" *ngIf="this.statusXiu===true">All-in</button>
+                <button *ngIf="this.statusXiu===true">Cược</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+<div class="history" style="color: black;">
+    <h3 style="margin-left: 100px; text-decoration: underline; margin-right: 40px; margin-top: 20px;">lịch sử phiên</h3>
+    <h2 class="item_history" *ngFor="let item of history" style="margin-top: 20px;">
+        -({{item}})
+    </h2>
+</div>
