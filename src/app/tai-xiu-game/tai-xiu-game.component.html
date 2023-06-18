@@ -1,4 +1,4 @@
-<h1 style="text-align: center; margin-top: 50px;">Tài xỉu</h1>
+<h1 style="text-align: center; margin-top: 50px;">Tài Hay Xỉu</h1>
 <div class="container">
     <div class="tai">
         <h1>
@@ -6,12 +6,12 @@
                     style="color: yellow;">({{this.tongGiaTri}})</span></span>Tài
         </h1>
         <button (click)="onTai()" *ngIf="count >5 && this.statusTai!==true">Nhập</button>
-        <p style="color: black; margin-bottom: -10px;" *ngIf="this.statusTai===false">{{ formatCurrency(moneyTai) }}</p>
+        <p style="color: black; margin-bottom: -10px;" *ngIf="this.statusTai===true">{{ formatCurrency(moneyTai) }}</p>
         <input type=" number" (change)="onhandelsTai($event)" class="text" placeholder="Nhập tiền..."
-            *ngIf="this.statusTai===true">
+            *ngIf="this.statusTai===true &&count >5">
         <div class="all">
-            <button (click)="alltai()" *ngIf="this.statusTai===true" class="all-in">All-in</button>
-            <button *ngIf="this.statusTai===true">Cược</button>
+            <button (click)="alltai()" *ngIf="this.statusTai===true&&count >5" class="all-in">All-in</button>
+            <button *ngIf="this.statusTai===true &&count >5">Cược</button>
         </div>
 
     </div>
@@ -30,30 +30,30 @@
             <div class="test">
                 <img *ngFor="let dice of row" class="xucxac_item" [src]="dice.imageUrl" alt="Xúc xắc" />
             </div>
-            <img class="bat" [ngClass]="!this.status ? 'bat' : 'bat1'"
-                src="https://res.cloudinary.com/doa7mkkpq/image/upload/v1687006023/ECMA/fgsdxl7iqqg96ianjjbh.png"
-                alt="">
+            <img class="bat" src="{{batImage}}" alt="" (mousedown)="handleMouseDown($event)"
+                (mousemove)="handleMouseMove($event)" (mouseup)="handleMouseUp($event)">
         </div>
         <div class="total">
             <div *ngFor="let dice of row">
-                <span style="font-size: 20px; margin-left: 10px;" *ngIf="dice && this.status===true">({{dice.value
+                <span style="font-size: 30px; margin-left: 10px; z-index: 100;"
+                    *ngIf="dice && this.status===true">({{dice.value
                     }})</span>
             </div>
         </div>
         <div class="xiu">
             <h1>
                 <span *ngIf="this.tongGiaTri <= 10 && this.isStatus===true"><span
-                        style="color: yellow;">({{this.tongGiaTri}})</span></span>Xỉu
+                        style="color: yellow; margin-bottom: -40px;">({{this.tongGiaTri}})</span></span>Xỉu
             </h1>
             <button (click)="onXiu()" *ngIf="count >5 && this.statusXiu!==true">Nhập</button>
-            <p style="color: black; margin-bottom: -10px;" *ngIf="this.statusXiu ===false">{{ formatCurrency(moneyXiu)
+            <p style="color: black;" *ngIf="this.statusXiu ===true">{{ formatCurrency(moneyXiu)
                 }}
             </p>
             <input type="number" class="text" placeholder="Nhập tiền..." (change)="onhandelsXiu($event)"
-                *ngIf="this.statusXiu===true">
+                *ngIf="this.statusXiu===true&&count >5">
             <div class="all">
-                <button (click)="allXiu()" *ngIf="this.statusXiu===true">All-in</button>
-                <button *ngIf="this.statusXiu===true">Cược</button>
+                <button (click)="allXiu()" *ngIf="this.statusXiu===true&&count >5">All-in</button>
+                <button *ngIf="this.statusXiu===true&&count >5">Cược</button>
             </div>
 
         </div>
@@ -66,6 +66,6 @@
 <div class="history" style="color: black;">
     <h3 style="margin-left: 100px; text-decoration: underline; margin-right: 40px; margin-top: 20px;">lịch sử phiên</h3>
     <h2 class="item_history" *ngFor="let item of history" style="margin-top: 20px;">
-        -({{item}})
+        ({{item}})
     </h2>
 </div>
